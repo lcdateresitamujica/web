@@ -1,0 +1,326 @@
+  
+        /* PALETA DE COLORES EXTRAÍDA DE LA MARCA TERESITA MUJICA */
+        :root {
+            --brand-dark-green: #2E4A1E;   /* Verde Oliva Oscuro */
+            --brand-leaf-green: #88B035;   /* Verde Hoja */
+            --brand-light-green: #EBF3E0;  /* Verde Suave de Fondo */
+            --brand-accent-gold: #C0D684;
+            --bg-body: #FAFAF7;             /* Fondo Crema / Blanco Orgánico */
+            --card-bg: #FFFFFF;
+            --text-main: #1F291E;
+            --text-muted: #5C6B58;
+            --border-color: #E2E8DC;
+            --danger-color: #DC2626;
+            --radius: 12px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: var(--bg-body); color: var(--text-main); display: flex; flex-direction: column; min-height: 100vh; }
+
+        /* HEADER DEL DASHBOARD */
+        header.dashboard-header {
+            background-color: var(--brand-dark-green);
+            color: #FFFFFF;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            box-shadow: 0 4px 15px rgba(46, 74, 30, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-subtitle { 
+            font-size: 0.75rem; 
+            letter-spacing: 1.5px; 
+            text-transform: uppercase; 
+            color: var(--brand-accent-gold); 
+        }
+
+        .header-brand h1 { 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            line-height: 1.2;
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .user-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--brand-accent-gold);
+            background-color: var(--brand-light-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--brand-dark-green);
+            font-size: 1rem;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+            text-align: right;
+        }
+
+        .user-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #FFFFFF;
+        }
+
+        .user-email {
+            font-size: 0.75rem;
+            color: var(--brand-accent-gold);
+        }
+
+        /* LAYOUT PRINCIPAL */
+        .dashboard-container {
+            display: flex;
+            flex: 1;
+            max-width: 1400px;
+            width: 100%;
+            margin: 20px auto;
+            padding: 0 20px;
+            gap: 25px;
+        }
+
+        /* MENU DE NAVEGACION (SIDEBAR) */
+        aside.sidebar {
+            width: 260px;
+            flex-shrink: 0;
+        }
+
+        .sidebar-menu {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: sticky;
+            top: 90px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: var(--brand-dark-green);
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover {
+            background-color: var(--brand-light-green);
+            color: var(--brand-dark-green);
+        }
+
+        .nav-item.active {
+            background-color: var(--brand-dark-green);
+            color: #FFFFFF;
+        }
+
+        .nav-item.active svg {
+            stroke: var(--brand-accent-gold);
+        }
+
+        .nav-item.logout {
+            margin-top: 15px;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 15px;
+            color: var(--danger-color);
+        }
+
+        .nav-item.logout svg {
+            stroke: var(--danger-color);
+        }
+
+        .nav-item.logout:hover {
+            background-color: #FEF2F2;
+        }
+
+        /* CONTENIDO DEL DASHBOARD */
+        main.main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--border-color); 
+            border-radius: var(--radius); 
+            padding: 22px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03); 
+        }
+
+        .card-title { 
+            font-size: 1.15rem; 
+            font-weight: 700; 
+            color: var(--brand-dark-green); 
+            margin-bottom: 16px; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid var(--brand-light-green);
+            padding-bottom: 10px;
+        }
+
+        /* KPIs / RESUMEN RAPIDO */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .kpi-card {
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .kpi-title {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .kpi-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--brand-dark-green);
+        }
+
+        /* TABLAS DEL DASHBOARD */
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+
+        th {
+            background-color: var(--brand-light-green);
+            color: var(--brand-dark-green);
+            padding: 12px;
+            font-weight: 700;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        tr:hover {
+            background-color: #FAFBF8;
+        }
+
+        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-block;
+        }
+
+        .badge-success { background: #DCFCE7; color: #15803D; }
+        .badge-warning { background: #FEF9C3; color: #A16207; }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 20px;
+            text-align: center;
+            margin-top: auto;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+        }
+
+        footer p {
+            margin-bottom: 6px;
+        }
+
+        footer a {
+            color: var(--brand-dark-green);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: var(--brand-leaf-green);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .dashboard-container {
+                flex-direction: column;
+            }
+            aside.sidebar {
+                width: 100%;
+            }
+            .sidebar-menu {
+                position: relative;
+                top: 0;
+            }
+            header.dashboard-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            .user-info {
+                text-align: center;
+            }
+        }
+  

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lcda. Teresita Mujica - Nutrición & Bienestar</title>
+     <link rel="icon" type="image/x-icon" href="images/favicon32x32.png">
+    
+    
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+       
+          .header-logo{
+            width: 80px;
+            height: 80px;
+        }
+
+        /* ====================================================
+           PALETA DE COLORES & VARIABLES
+           ==================================================== */
+        :root {
+            --brand-dark-green: #2E4A1E;   /* Verde Oliva Oscuro del Header */
+            --brand-leaf-green: #88B035;   /* Verde Hoja de Acción */
+            --brand-light-green: #EBF3E0;  /* Verde Suave de Fondo */
+            --brand-accent-gold: #C0D684;  /* Verde Dorado Acento */
+            --bg-body: #FAFAF7;             /* Fondo Crema / Blanco Orgánico */
+            --card-bg: #FFFFFF;            /* Fondo de Tarjetas */
+            --text-main: #1F291E;          /* Texto Principal */
+            --text-muted: #5C6B58;         /* Texto Secundario */
+            --border-color: #E2E8DC;       /* Bordes */
+            --radius: 16px;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* ====================================================
+           FONDO GENERAL CON ESTAMPADO (BODY)
+           ==================================================== */
+        body { 
+            background-color: var(--bg-body); 
+            color: var(--text-main); 
+            line-height: 1.6; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/aguacate.avif');
+            background-repeat: repeat;
+            background-size: 220px auto;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; width: 100%; }
+
+        /* ====================================================
+           CABECERA Y NAVEGACIÓN
+           ==================================================== */
+        header { 
+            background-color: var(--brand-dark-green); 
+            position: sticky; 
+            top: 0; 
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(46, 74, 30, 0.15);
+        }
+
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 75px; }
+
+        .logo { display: flex; flex-direction: column; text-decoration: none; }
+        .logo-title { color: #FFFFFF; font-weight: 700; font-size: 1.25rem; letter-spacing: 0.5px; }
+        .logo-subtitle { color: var(--brand-accent-gold); font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+
+        .nav-menu { display: flex; gap: 18px; list-style: none; }
+        .nav-menu a { 
+            text-decoration: none; 
+            color: rgba(255, 255, 255, 0.9); 
+            font-weight: 500; 
+            font-size: 0.88rem; 
+            transition: color 0.2s; 
+        }
+        .nav-menu a:hover, .nav-menu a.active { color: var(--brand-accent-gold); }
+
+        .menu-toggle { 
+            display: none; 
+            background: none; 
+            border: none; 
+            color: #FFFFFF; 
+            font-size: 1.8rem; 
+            cursor: pointer; 
+        }
+
+        /* ====================================================
+           ESTILOS DE SECCIONES GENERALES
+           ==================================================== */
+        .hero-section { text-align: center; padding: 45px 20px 35px 20px; }
+        .hero-subtitle { font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-leaf-green); font-weight: 700; margin-bottom: 6px; }
+        .hero-section h1 { color: var(--brand-dark-green); font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; }
+        .hero-section p { color: var(--text-muted); font-size: 1.05rem; max-width: 650px; margin: 0 auto; }
+
+        .content-section {
+            margin-bottom: 50px;
+            scroll-margin-top: 90px;
+        }
+
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--brand-light-green);
+            color: var(--brand-dark-green);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 650px;
+            margin: 0 auto 35px auto;
+        }
+
+        .section-header h2 {
+            color: var(--brand-dark-green);
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .section-intro {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* ====================================================
+           COMPONENTES ESPECÍFICOS
+           ==================================================== */
+        
+        /* SOBRE MÍ */
+        .profile-header { display: flex; align-items: center; gap: 30px; margin-bottom: 25px; }
+        .profile-img-container { width: 130px; height: 130px; border-radius: 50%; overflow: hidden; border: 3px solid var(--brand-leaf-green); flex-shrink: 0; }
+        .profile-img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-title-block h2 { color: var(--brand-dark-green); font-size: 1.7rem; }
+        .profile-title-block .subtitle { color: var(--text-muted); font-weight: 500; }
+        .text-content p { color: var(--text-main); font-size: 1.05rem; line-height: 1.7; margin-bottom: 30px; }
+        .highlights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .highlight-item { background-color: var(--bg-body); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .highlight-item .icon { font-size: 1.5rem; display: block; margin-bottom: 8px; }
+        .highlight-item h4 { color: var(--brand-dark-green); margin-bottom: 6px; }
+        .highlight-item p { color: var(--text-muted); font-size: 0.88rem; }
+
+        /* CONSULTA ONLINE */
+        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 30px; }
+        .step-card { background-color: var(--bg-body); padding: 25px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .step-number { width: 32px; height: 32px; background-color: var(--brand-leaf-green); color: #ffffff; font-weight: 700; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+        .step-card h3 { color: var(--brand-dark-green); font-size: 1.1rem; margin-bottom: 8px; }
+        .step-card p { color: var(--text-muted); font-size: 0.9rem; }
+        .cta-wrapper { text-align: center; margin-top: 20px; }
+        .btn-primary { display: inline-block; background-color: var(--brand-leaf-green); color: #ffffff; padding: 14px 28px; border-radius: 10px; text-decoration: none; font-weight: 600; border: none; cursor: pointer; transition: background-color 0.2s; }
+        .btn-primary:hover { background-color: var(--brand-dark-green); }
+
+        /* RECETAS Y PEDIDOS (GRID DE TARGETAS) */
+        .items-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+        .item-card { background-color: var(--bg-body); border-radius: 12px; border: 1px solid var(--border-color); overflow: hidden; display: flex; flex-direction: column; }
+        .item-card img { width: 100%; height: 180px; object-fit: cover; }
+        .item-card-body { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        .item-card-body h3 { color: var(--brand-dark-green); font-size: 1.2rem; margin-bottom: 8px; }
+        .item-card-body p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 15px; flex-grow: 1; }
+        .price-tag { font-size: 1.1rem; font-weight: 700; color: var(--brand-leaf-green); margin-bottom: 12px; }
+
+        /* TEST DE OBESIDAD */
+        .imc-form { max-width: 500px; margin: 0 auto; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .form-group label { display: block; color: var(--brand-dark-green); font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; }
+        .form-group input { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; font-size: 1rem; background-color: var(--bg-body); }
+        .btn-full { width: 100%; }
+        .result-box { margin-top: 30px; padding: 20px; background-color: var(--brand-light-green); border-radius: 12px; text-align: center; border: 1px solid var(--brand-accent-gold); }
+        .result-box h3 { color: var(--brand-dark-green); margin-bottom: 6px; }
+        .result-status { font-weight: 700; color: var(--brand-dark-green); font-size: 1.1rem; margin-bottom: 10px; }
+        .result-disclaimer { font-size: 0.8rem; color: var(--text-muted); }
+
+        /* PREGUNTAS FRECUENTES (FAQ) */
+        .faq-list { display: flex; flex-direction: column; gap: 15px; }
+        .faq-item { background-color: var(--bg-body); border-radius: 10px; border: 1px solid var(--border-color); padding: 20px; }
+        .faq-item h3 { color: var(--brand-dark-green); font-size: 1.05rem; margin-bottom: 8px; }
+        .faq-item p { color: var(--text-muted); font-size: 0.92rem; }
+
+        /* ====================================================
+           FOOTER (1 FILA / 3 COLUMNAS)
+           ==================================================== */
+        footer { 
+            background-color: var(--brand-dark-green); 
+            color: #FFFFFF; 
+            margin-top: auto; 
+            padding: 45px 0 35px 0; 
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
+        .footer-col h3 { font-size: 1.05rem; color: var(--brand-accent-gold); margin-bottom: 16px; font-weight: 700; }
+        .footer-col p, .footer-col a { color: rgba(255, 255, 255, 0.85); font-size: 0.88rem; text-decoration: none; }
+        .contact-info { display: flex; flex-direction: column; gap: 10px; }
+        .contact-item { display: flex; align-items: center; gap: 8px; }
+        .social-links { display: flex; gap: 12px; }
+        .social-btn { display: inline-flex; align-items: center; justify-content: center; padding: 8px 16px; border-radius: 8px; background-color: rgba(255, 255, 255, 0.1); color: #FFFFFF; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(255, 255, 255, 0.15); transition: all 0.2s; }
+        .social-btn:hover { background-color: var(--brand-leaf-green); border-color: var(--brand-leaf-green); }
+
+        /* ====================================================
+           ADAPTABILIDAD RESPONSIVE
+           ==================================================== */
+        @media (max-width: 850px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .contact-item { justify-content: center; }
+            .social-links { justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                width: 100%;
+                background-color: var(--brand-dark-green);
+                padding: 20px;
+                gap: 16px;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+            }
+            .nav-menu.active { display: flex; }
+            .profile-header { flex-direction: column; text-align: center; }
+            .highlights-grid, .steps-grid, .items-grid { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<body>
+
+       <!-- CABECERA DE NAVEGACIÓN -->
+    <header>
+        <div class="container nav-container">
+               <img src="images/logocolorteresita.png" alt="Teresita Mujica Logo" class="header-logo">
+            <a href="index.html" class="logo">
+                <span class="logo-title">Teresita Mujica</span>
+                <span class="logo-subtitle">Nutricionista & Dietista</span>
+            </a>
+
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir Menú">&#9776;</button>
+
+            <nav>
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="index.html" class="active">Inicio</a></li>
+                    <li><a href="sobre-mi.html">Sobre mí</a></li>
+                    <li><a href="consultaonline.html">Consulta Online</a></li>
+                    <li><a href="recetas.html">Recetas</a></li>
+                    <li><a href="pedidos.html">Pedidos</a></li>
+                    <li><a href="testobesidad.html">Test Obesidad</a></li>
+                    <li><a href="preguntas.html">Preguntas Frecuentes</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="container">
+
+
+        
+        <!-- HERO / INICIO -->
+        <section id="inicio" class="hero-section">
+            <div class="hero-subtitle">Nutrición Funcional & Vida Saludable</div>
+            <h1>Bienestar Alimentario Integral</h1>
+            <p>Descubre un enfoque nutricional adaptado a tus necesidades con atención personalizada y productos de origen natural.</p>
+        </section>
+
+       
+
+        <!-- SECCIÓN: RECETAS -->
+        <section id="recetas" class="content-section">
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="badge">Cocina Saludable</span>
+                    <h2>Recetas Destacadas</h2>
+                    <p class="section-intro">Opciones equilibradas, nutritivas y sencillas de preparar para tu día a día.</p>
+                </div>
+
+                <div class="items-grid">
+                    <div class="item-card">
+                        <img src="images/comida1.jpeg" alt="Ensalada Orgánica">
+                        <div class="item-card-body">
+                            <h3>Ensalada Bowl de Quinoa y Aguacate</h3>
+                            <p>Rica en fibra y grasas saludables. Ideal para almuerzos ligeros pero saciantes.</p>
+                            <a href="#" class="btn-primary" style="text-align:center;">Ver Receta</a>
+                        </div>
+                    </div>
+                    <div class="item-card">
+                        <img src="images/teresita4.jpg" alt="Batido Verde">
+                        <div class="item-card-body">
+                            <h3>Deditos de Queso con Masa de Yuca (Tequeños) </h3>
+                            <p>Deditos de masa de Yuca y Queso Excelente Calidad</p>
+                            <a href="#" class="btn-primary" style="text-align:center;">Ver Receta</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+      
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                
+                <div class="footer-col">
+                    <div class="logo-title">Teresita Mujica</div>
+                    <div class="logo-subtitle" style="margin-bottom: 12px;">Nutrición & Productos Saludables</div>
+                    <p>Asesoría nutricional especializada y selección de alimentos naturales enfocados en prevenir patologías y potenciar la vitalidad.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contacto directo</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📞 WhatsApp: +58 (414) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>✉️ Correo: consulta@teresitamujica.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>📍 Consulta Presencial, Online & Delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Comunidad</h3>
+                    <p style="margin-bottom: 15px;">Sígueme para recibir sugerencias de alimentación consciente:</p>
+                    <div class="social-links">
+                        <a href="#" class="social-btn">
+                            <i class="fa-brands fa-instagram"> </i>  Instagram
+                        </a>
+                        <a href="#" class="social-btn">
+                            <i class="fa-brands fa-facebook-f"> </i>  Facebook
+                        </a>
+                        <a href="#" class="social-btn">
+                            <i class="fa-brands fa-whatsapp"> </i>  WhatsApp
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        // Menú hamburguesa mobile
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Calculadora de IMC
+        function calcularIMC() {
+            const peso = parseFloat(document.getElementById('peso').value);
+            const estaturaCm = parseFloat(document.getElementById('estatura').value);
+
+            if (peso > 0 && estaturaCm > 0) {
+                const estaturaM = estaturaCm / 100;
+                const imc = (peso / (estaturaM * estaturaM)).toFixed(1);
+
+                document.getElementById('valor-imc').textContent = imc;
+
+                let diagnostico = '';
+                if (imc < 18.5) diagnostico = 'Bajo peso';
+                else if (imc < 25) diagnostico = 'Peso normal / Adecuado';
+                else if (imc < 30) diagnostico = 'Sobrepeso';
+                else if (imc < 35) diagnostico = 'Obesidad Grado I';
+                else if (imc < 40) diagnostico = 'Obesidad Grado II';
+                else diagnostico = 'Obesidad Grado III (Mórbida)';
+
+                document.getElementById('diagnostico-imc').textContent = `Clasificación: ${diagnostico}`;
+                document.getElementById('resultado-imc').style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

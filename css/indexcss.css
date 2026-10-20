@@ -1,0 +1,352 @@
+    /* ====================================================
+           PALETA DE COLORES (TERESITA MUJICA)
+           ==================================================== */
+         :root {
+            --brand-dark-green: #2E4A1E;   /* Verde Oliva Oscuro del Header */
+            --brand-leaf-green: #88B035;   /* Verde Hoja de Acción */
+            --brand-light-green: #EBF3E0;  /* Verde Suave de Fondo */
+            --brand-accent-gold: #C0D684;  /* Verde Dorado Acento */
+            --bg-body: #FAFAF7;             /* Fondo Crema / Blanco Orgánico */
+            --card-bg: #FFFFFF;            /* Fondo de Tarjetas */
+            --text-main: #1F291E;          /* Texto Principal */
+            --text-muted: #5C6B58;         /* Texto Secundario */
+            --border-color: #E2E8DC;       /* Bordes */
+            --radius: 16px;
+        }
+
+
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* ====================================================
+           FONDO GENERAL CON ESTAMPADO (BODY)
+           ==================================================== */
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('../images/aguacate.avif');
+            background-repeat: repeat;
+            background-size: 220px auto;
+            opacity: 0.06;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 20px; width: 100%; }
+
+        /* ====================================================
+           CABECERA Y NAVEGACIÓN
+           ==================================================== */
+        header {
+            background-color: var(--brand-dark-green);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(46, 74, 30, 0.15);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 75px; }
+
+        /* ====================================================
+   EFECTO DE DESTELLO EN EL NOMBRE (CADA 10 SEGUNDOS)
+   ==================================================== */
+
+   
+   
+
+.logo { 
+    display: flex; 
+    flex-direction: column; 
+    text-decoration: none; 
+    transition: transform 0.25s ease; 
+}
+
+        .logo:hover { 
+            transform: scale(1.02); 
+        }
+        .logo-subtitle{ color: #c0d684;}
+        .logo-title { 
+            font-weight: 700; 
+            font-size: 1.25rem; 
+            letter-spacing: 0.5px;
+            
+            /* Configuración para el destello */
+            background: linear-gradient(
+                110deg, 
+                #FFFFFF 35%, 
+                var(--brand-accent-gold) 50%, 
+                #FFFFFF 65%
+            );
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            
+            /* Animación continua de 10 segundos */
+            animation: shineText 10s ease-in-out infinite;
+        }
+
+        /* Animación: El brillo pasa del segundo 0 al 2, y descansa 8 segundos */
+        @keyframes shineText {
+            0% {
+                background-position: 200% 0;
+            }
+            20% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: -200% 0;
+            }
+        }
+        .nav-menu { display: flex; gap: 20px; list-style: none; }
+        .nav-menu a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            font-size: 0.9rem;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+        
+        /* Indicador sutil al pasar el cursor sobre el menú */
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--brand-accent-gold);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-menu a:hover::after, .nav-menu a.active::after {
+            width: 100%;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active { color: var(--brand-accent-gold); }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #FFFFFF;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .menu-toggle:active { transform: scale(0.9); }
+
+        /* ====================================================
+           HERO SECTION (ANIMACIONES DE ENTRADA)
+           ==================================================== */
+        .hero-section { 
+            text-align: center; 
+            padding: 50px 20px 35px 20px; 
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .hero-subtitle { 
+            font-size: 0.82rem; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            color: var(--brand-leaf-green); 
+            font-weight: 700; 
+            margin-bottom: 6px; 
+        }
+
+        .hero-section h1 { color: var(--brand-dark-green); font-size: 2.4rem; font-weight: 700; margin-bottom: 8px; }
+        .hero-section p { color: var(--text-muted); font-size: 1.05rem; max-width: 650px; margin: 0 auto; }
+
+        /* ====================================================
+           TARJETAS DE ACCESO CON INTERACCIÓN
+           ==================================================== */
+        .access-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 850px;
+            margin: 0 auto 60px auto;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .access-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), 
+                        border-color 0.35s ease, 
+                        box-shadow 0.35s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            min-height: 220px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Resplandor suave y elevación al pasar el ratón */
+        .access-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--brand-leaf-green);
+            box-shadow: 0 16px 30px rgba(136, 176, 53, 0.15), 0 0 20px rgba(136, 176, 53, 0.08);
+        }
+
+        .card-img-wrapper {
+            width: 200px;
+            height: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background-color: var(--brand-light-green);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .access-card:hover .card-img {
+            transform: scale(1.06);
+        }
+
+        .card-content { flex-grow: 1; }
+        .card-content h2 {
+            font-size: 1.5rem;
+            color: var(--brand-dark-green);
+            margin-bottom: 10px;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+
+        .access-card:hover .card-content h2 {
+            color: var(--brand-leaf-green);
+        }
+
+        .card-content p { font-size: 1rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* ====================================================
+           FOOTER
+           ==================================================== */
+        footer {
+            background-color: var(--brand-dark-green);
+            color: #FFFFFF;
+            margin-top: auto;
+            padding: 45px 0 35px 0;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .footer-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px; }
+
+        .footer-col h3 {
+            font-size: 1.05rem;
+            color: var(--brand-accent-gold);
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+        .footer-col p, .footer-col a { color: rgba(255, 255, 255, 0.85); font-size: 0.88rem; text-decoration: none; }
+        
+        .contact-info { display: flex; flex-direction: column; gap: 10px; }
+        .contact-item { display: flex; align-items: center; gap: 8px; }
+
+        .social-links { display: flex; gap: 12px; }
+        .social-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #FFFFFF;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+        }
+        .social-btn:hover {
+            background-color: var(--brand-leaf-green);
+            border-color: var(--brand-leaf-green);
+            transform: translateY(-2px);
+        }
+
+        /* Keyframes de Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ====================================================
+           ADAPTABILIDAD RESPONSIVE
+           ==================================================== */
+        @media (max-width: 850px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; text-align: center; }
+            .contact-item { justify-content: center; }
+            .social-links { justify-content: center; }
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle { display: block; }
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 75px;
+                left: 0;
+                width: 100%;
+                background-color: var(--brand-dark-green);
+                padding: 20px;
+                gap: 16px;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+            }
+            .nav-menu.active { display: flex; animation: fadeIn 0.3s ease; }
+        }
+
+        @media (max-width: 600px) {
+            .access-card { flex-direction: column; text-align: center; padding: 40px; }
+            .card-img-wrapper { width: 100%; height: 250px; }
+        }
+
+        @media (max-width: 768px) {
+  .nav-menu {
+    display: none; /* Oculto por defecto en móviles */
+  }
+
+  .nav-menu.active {
+    display: block; /* O flex, según la estructura de tu layout */
+  }
+}
+

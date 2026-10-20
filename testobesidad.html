@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lcda. Teresita Mujica - Nutrición & Bienestar</title>
+     <link rel="icon" type="image/x-icon" href="images/favicon32x32.png">
+      <link href="css/indexcss.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/testcss.css">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+</head>
+<style>
+          .header-logo{
+            width: 80px;
+            height: 80px;
+        }
+</style>
+<body>
+
+   <!-- Tu header modular -->
+    <mi-header></mi-header>
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="container">
+        
+        <!-- HERO / INICIO -->
+        <section id="inicio" class="hero-section">
+            <div class="hero-subtitle">Nutrición Funcional & Vida Saludable</div>
+            <h1>Bienestar Alimentario Integral</h1>
+            <p>Descubre un enfoque nutricional adaptado a tus necesidades con atención personalizada y productos de origen natural.</p>
+        </section>
+
+        <!-- SECCIÓN: TEST DE OBESIDAD Y EVALUACIÓN NUTRICIONAL COMPLETA -->
+        <section id="test-obesidad" class="content-section">
+            <div class="section-card">
+                <div class="section-header">
+                    <span class="badge">Autoevaluación Clínica</span>
+                    <h2>Evaluación Nutricional & Diagnóstico Preliminar</h2>
+                    <p class="section-intro">Completa los siguientes datos metabólicos y de hábitos para recibir una estimación de salud corporal e ingesta calórica.</p>
+                </div>
+
+                <form class="imc-form" onsubmit="event.preventDefault(); calcularEvaluacionCompleta();">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="sexo">Sexo biológico:</label>
+                            <select id="sexo" required>
+                                <option value="femenino">Femenino</option>
+                                <option value="masculino">Masculino</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="edad">Edad (años):</label>
+                            <input type="number" id="edad" placeholder="Ej: 34" min="12" max="100" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="peso">Peso (kg):</label>
+                            <input type="number" id="peso" step="0.1" placeholder="Ej: 70.5" min="30" max="300" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="estatura">Estatura (cm):</label>
+                            <input type="number" id="estatura" placeholder="Ej: 165" min="100" max="230" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cintura">Circunferencia de Cintura (cm):</label>
+                            <input type="number" id="cintura" placeholder="Ej: 82 (A la altura del ombligo)" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="actividad">Nivel de Actividad Física:</label>
+                            <select id="actividad" required>
+                                <option value="sedentario">Sedentario (Poco o ningún ejercicio)</option>
+                                <option value="ligero">Ligero (Ejercicio 1-3 días/semana)</option>
+                                <option value="moderado">Moderado (Ejercicio 3-5 días/semana)</option>
+                                <option value="intenso">Intenso (Ejercicio 6-7 días/semana)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label>Síntomas o Factores de Riesgo (Opcional):</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="sintoma-fatiga"> Cansancio / Fatiga frecuente
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="sintoma-antojos"> Antojos frecuentes de dulce/harinas
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="sintoma-digestao"> Digestión lenta o inflamación
+                                </label>
+                                <label class="checkbox-item">
+                                    <input type="checkbox" id="sintoma-antecedentes"> Antecedentes familiares (Diabetes/HTA)
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary btn-full">Obtener Diagnóstico Nutricional</button>
+                </form>
+
+                <!-- RESULTADOS DETALLADOS -->
+                <div id="resultado-imc" class="result-box" style="display: none;">
+                    <div class="result-header">
+                        <h3>Resultado: <span id="valor-imc">--</span> kg/m²</h3>
+                        <p id="diagnostico-imc" class="result-status">--</p>
+                    </div>
+
+                    <!-- NUEVA BARRA DE ESTADO CORPORAL VISUAL -->
+                    <div class="body-status-wrapper">
+                        <div class="body-status-title">
+                            <span>Estado Corporal Actual:</span>
+                            <span id="text-pos-barra" style="color: var(--brand-leaf-green);">Normopeso</span>
+                        </div>
+                        <div class="status-bar-container">
+                            <div id="puntero-barra" class="status-pointer"></div>
+                        </div>
+                        <div class="status-labels">
+                            <span>Bajo</span>
+                            <span>Saludable</span>
+                            <span>Sobrepeso</span>
+                            <span>Ob. I</span>
+                            <span>Ob. II/III</span>
+                        </div>
+                    </div>
+
+                    <div class="metrics-summary-grid">
+                        <div class="metric-card">
+                            <div class="label">Riesgo Cardiovascular</div>
+                            <div id="riesgo-cintura" class="val">--</div>
+                            <div id="subtext-cintura" class="subtext">Cintura: -- cm</div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="label">Rango Peso Saludable</div>
+                            <div id="rango-peso" class="val">--</div>
+                            <div class="subtext">según tu estatura</div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="label">Gasto Calórico Estimado</div>
+                            <div id="calorias-mantenimiento" class="val">-- kcal</div>
+                            <div class="subtext">para mantener peso actual</div>
+                        </div>
+                    </div>
+
+                    <div class="recommendations-block">
+                        <h4>🌱 Pautas Nutricionales Recomendadas:</h4>
+                        <ul id="lista-recomendaciones" class="recommendations-list">
+                            <!-- Se generan con Javascript -->
+                        </ul>
+                    </div>
+
+                    <div class="whatsapp-cta">
+                        <p>¿Deseas personalizar un plan de alimentación ajustado a tu metabolismo?</p>
+                        <a id="btn-whatsapp-agenda" href="#" target="_blank" class="btn-whatsapp">
+                            📲 Agendar Consulta con la Lcda. Teresita Mujica
+                        </a>
+                    </div>
+
+                    <p class="result-disclaimer">Nota: Este análisis es una evaluación orientativa. No sustituye una consulta clínica ni una medición antropométrica de pliegues cutáneos e inbody.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+ <mi-footer></mi-footer>
+
+    <!-- LÓGICA JAVASCRIPT -->
+    <script>
+        // Menú hamburguesa mobile
+   
+        // EVALUACIÓN COMPLETA DE NUTRICIÓN
+        function calcularEvaluacionCompleta() {
+            const sexo = document.getElementById('sexo').value;
+            const edad = parseInt(document.getElementById('edad').value);
+            const peso = parseFloat(document.getElementById('peso').value);
+            const estaturaCm = parseFloat(document.getElementById('estatura').value);
+            const cintura = parseFloat(document.getElementById('cintura').value);
+            const actividad = document.getElementById('actividad').value;
+
+            if (peso > 0 && estaturaCm > 0 && edad > 0 && cintura > 0) {
+                const estaturaM = estaturaCm / 100;
+                const imc = parseFloat((peso / (estaturaM * estaturaM)).toFixed(1));
+
+                document.getElementById('valor-imc').textContent = imc;
+
+                // 1. Diagnóstico de IMC
+                let diagnostico = '';
+                if (imc < 18.5) diagnostico = 'Bajo peso';
+                else if (imc < 25) diagnostico = 'Peso normopeso / Adecuado';
+                else if (imc < 30) diagnostico = 'Sobrepeso';
+                else if (imc < 35) diagnostico = 'Obesidad Grado I';
+                else if (imc < 40) diagnostico = 'Obesidad Grado II';
+                else diagnostico = 'Obesidad Grado III (Mórbida)';
+
+                document.getElementById('diagnostico-imc').textContent = `Clasificación IMC: ${diagnostico}`;
+                document.getElementById('text-pos-barra').textContent = diagnostico;
+
+                // LÓGICA DEL PUNTERO DE LA BARRA DE ESTADO (Escala 15 a 40 IMC mapeada a 0% - 100%)
+                let porcentajeBarra = 0;
+                if (imc <= 15) porcentajeBarra = 2;
+                else if (imc >= 40) porcentajeBarra = 98;
+                else {
+                    porcentajeBarra = ((imc - 15) / (40 - 15)) * 100;
+                }
+                document.getElementById('puntero-barra').style.left = `${porcentajeBarra}%`;
+
+                // 2. Riesgo Abdominal por Circunferencia de Cintura
+                let riesgoCinturaText = 'Bajo';
+                let colorRiesgo = '#2E4A1E';
+
+                if (sexo === 'femenino') {
+                    if (cintura >= 88) { riesgoCinturaText = 'Muy Alto'; colorRiesgo = '#C0392B'; }
+                    else if (cintura >= 80) { riesgoCinturaText = 'Aumentado'; colorRiesgo = '#D35400'; }
+                } else {
+                    if (cintura >= 102) { riesgoCinturaText = 'Muy Alto'; colorRiesgo = '#C0392B'; }
+                    else if (cintura >= 94) { riesgoCinturaText = 'Aumentado'; colorRiesgo = '#D35400'; }
+                }
+
+                const elRiesgo = document.getElementById('riesgo-cintura');
+                elRiesgo.textContent = riesgoCinturaText;
+                elRiesgo.style.color = colorRiesgo;
+                document.getElementById('subtext-cintura').textContent = `Cintura: ${cintura} cm`;
+
+                // 3. Rango de Peso Saludable (IMC 18.5 - 24.9)
+                const pesoMin = (18.5 * (estaturaM * estaturaM)).toFixed(1);
+                const pesoMax = (24.9 * (estaturaM * estaturaM)).toFixed(1);
+                document.getElementById('rango-peso').textContent = `${pesoMin} - ${pesoMax} kg`;
+
+                // 4. Cálculo TMB (Harris-Benedict) y Gasto Energético
+                let tmb = 0;
+                if (sexo === 'femenino') {
+                    tmb = 655 + (9.6 * peso) + (1.8 * estaturaCm) - (4.7 * edad);
+                } else {
+                    tmb = 66 + (13.7 * peso) + (5 * estaturaCm) - (6.8 * edad);
+                }
+
+                let multActividad = 1.2;
+                if (actividad === 'ligero') multActividad = 1.375;
+                if (actividad === 'moderado') multActividad = 1.55;
+                if (actividad === 'intenso') multActividad = 1.725;
+
+                const caloriasTotales = Math.round(tmb * multActividad);
+                document.getElementById('calorias-mantenimiento').textContent = `${caloriasTotales} kcal`;
+
+                // 5. Generación de Pautas Nutricionales Personalizadas
+                const recList = document.getElementById('lista-recomendaciones');
+                recList.innerHTML = '';
+
+                let pautas = [];
+
+                if (imc >= 25) {
+                    pautas.push('Se sugiere priorizar alimentos de baja densidad calórica y alta densidad nutricional (verduras de hoja verde, hortalizas, frutas enteras).');
+                    pautas.push('Aumenta la ingesta de agua limpia/filtrada a un rango estimado de 2.5 a 3 litros al día.');
+                } else if (imc < 18.5) {
+                    pautas.push('Se recomienda estructurar comidas con mayor densidad calórica saludable (frutos secos, semillas, aguacate, aceite de oliva virgen extra).');
+                    pautas.push('Asegurar un aporte proteico adecuado distribuido en 4 a 5 tomas diarias.');
+                } else {
+                    pautas.push('¡Excelente! Mantén un equilibrio metabólico incluyendo proteínas magras, grasas saludables y carbohidratos complejos.');
+                }
+
+                if (riesgoCinturaText !== 'Bajo') {
+                    pautas.push('Debido al perímetro de cintura, es fundamental limitar los azúcares refinados, ultraprocesados y bebidas azucaradas para reducir grasa visceral.');
+                }
+
+                if (document.getElementById('sintoma-fatiga').checked || document.getElementById('sintoma-antojos').checked) {
+                    pautas.push('Tus síntomas de fatiga o antojos pueden responder a picos de glucosa/insulina. Se recomienda incluir fibra soluble y proteína en el desayuno.');
+                }
+
+                if (document.getElementById('sintoma-digestao').checked) {
+                    pautas.push('Para optimizar la digestión, evalúa la salud intestinal y el consumo de alimentos pro/prebióticos.');
+                }
+
+                pautas.forEach(pauta => {
+                    const li = document.createElement('li');
+                    li.textContent = pauta;
+                    recList.appendChild(li);
+                });
+
+                // 6. Configuración del Botón de WhatsApp
+                const whatsappNumber = "584246140443"; // Número del footer
+                const msjWhatsapp = encodeURIComponent(
+                    `Hola Lcda. Teresita, realicé el test en su sitio web. Mis datos:\n` +
+                    `- IMC: ${imc} (${diagnostico})\n` +
+                    `- Cintura: ${cintura} cm (Riesgo ${riesgoCinturaText})\n` +
+                    `- Edad: ${edad} años | Peso: ${peso} kg\n` +
+                    `Me gustaría agendar una consulta personalizada.`
+                );
+                document.getElementById('btn-whatsapp-agenda').href = `https://wa.me/${whatsappNumber}?text=${msjWhatsapp}`;
+
+                // Mostrar resultados con animación fluida
+                const resBox = document.getElementById('resultado-imc');
+                resBox.style.display = 'block';
+                resBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+    </script>
+</body>
+</html>
